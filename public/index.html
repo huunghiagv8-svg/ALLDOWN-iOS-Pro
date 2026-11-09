@@ -3,29 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>ALLDOWN iOS Pro — Tải Video TikTok & Facebook Không Logo</title>
+  <title>Nghĩa MMO Download — Tải Video TikTok & Facebook Không Logo 24/7</title>
 
-  <!-- Cấu hình iOS Standalone App (Add to Home Screen) -->
+  <!-- OpenGraph Preview Card: Hiển thị "Nghĩa MMO Download" + Icon Apple Shortcuts khi gửi qua Zalo/Messenger -->
+  <meta name="apple-itunes-app" content="app-id=915249334, app-argument=shortcuts://shortcuts/971546de23f04e6ba1c8a90a19d576fc" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Nghĩa MMO Download" />
+  <meta property="og:description" content="Đã chia sẻ bằng iCloud" />
+  <meta property="og:site_name" content="www.icloud.com" />
+  <meta property="og:image" content="https://www.icloud.com/og_images/shortcuts.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Cấu hình iOS Standalone App (Add to Home Screen & WebClip) -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="ALLDOWN" />
+  <meta name="apple-mobile-web-app-title" content="ALLDOWN Pro" />
   <meta name="theme-color" content="#090A0F" />
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="apple-touch-icon" href="/icon.svg" />
-  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon.png" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
 
   <style>
     :root {
       --bg-primary: #090a0f;
-      --bg-card: rgba(24, 26, 38, 0.78);
-      --bg-card-solid: #151722;
+      --bg-card: rgba(24, 26, 38, 0.82);
       --border-glass: rgba(255, 255, 255, 0.1);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --accent-tiktok: #00f2fe;
       --accent-pink: #ff0050;
       --accent-fb: #1877f2;
-      --accent-purple: #8b5cf6;
       --accent-green: #10b981;
       --safe-top: env(safe-area-inset-top, 20px);
       --safe-bottom: env(safe-area-inset-bottom, 20px);
@@ -48,7 +56,7 @@
       color: var(--text-main);
       min-height: 100vh;
       padding-top: calc(var(--safe-top) + 12px);
-      padding-bottom: calc(var(--safe-bottom) + 90px);
+      padding-bottom: calc(var(--safe-bottom) + 92px);
       overflow-x: hidden;
     }
 
@@ -58,12 +66,11 @@
       padding: 0 16px;
     }
 
-    /* iOS Header */
     .ios-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .brand {
@@ -87,7 +94,7 @@
     }
 
     .brand-title h1 {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 800;
       letter-spacing: -0.4px;
       background: linear-gradient(90deg, #fff, #cbd5e1);
@@ -96,7 +103,7 @@
     }
 
     .brand-title p {
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--text-muted);
       font-weight: 500;
     }
@@ -122,7 +129,6 @@
       box-shadow: 0 0 8px #10b981;
     }
 
-    /* Platform Badges */
     .platform-Segment {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -143,10 +149,6 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
     }
 
     .seg-btn.active {
@@ -155,7 +157,6 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
 
-    /* Glass Card */
     .glass-card {
       background: var(--bg-card);
       backdrop-filter: blur(20px);
@@ -168,7 +169,7 @@
     }
 
     .input-label {
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
       color: #cbd5e1;
       margin-bottom: 10px;
@@ -186,7 +187,7 @@
 
     .url-input {
       width: 100%;
-      background: rgba(9, 10, 15, 0.75);
+      background: rgba(9, 10, 15, 0.78);
       border: 1.5px solid rgba(255, 255, 255, 0.14);
       border-radius: 16px;
       padding: 15px 44px 15px 15px;
@@ -262,7 +263,6 @@
       box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
     }
 
-    /* Loading Spinner */
     .loader-box {
       display: none;
       text-align: center;
@@ -283,7 +283,6 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Alert / Error */
     .error-banner {
       display: none;
       background: rgba(239, 68, 68, 0.16);
@@ -296,7 +295,6 @@
       line-height: 1.45;
     }
 
-    /* Result Card */
     #resultSection {
       display: none;
     }
@@ -367,11 +365,7 @@
       border-radius: 14px;
       text-decoration: none;
       color: #fff;
-      transition: background 0.2s;
-    }
-
-    .quality-item:active {
-      background: rgba(255, 255, 255, 0.14);
+      cursor: pointer;
     }
 
     .q-left {
@@ -397,7 +391,7 @@
     }
 
     .q-label {
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 600;
     }
 
@@ -407,12 +401,11 @@
       color: #fff;
       padding: 7px 12px;
       border-radius: 10px;
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
     }
 
-    /* Steps & Shortcut Section */
     .step-item {
       display: flex;
       gap: 12px;
@@ -459,7 +452,6 @@
       margin: 8px 0;
     }
 
-    /* Tab Views */
     .tab-pane {
       display: none;
     }
@@ -467,13 +459,12 @@
       display: block;
     }
 
-    /* Bottom iOS Tab Bar */
     .ios-tabbar {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(15, 17, 26, 0.88);
+      background: rgba(15, 17, 26, 0.9);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -528,18 +519,34 @@
       <div class="brand">
         <div class="brand-logo">↓</div>
         <div class="brand-title">
-          <h1>ALLDOWN iOS</h1>
-          <p>SnapVideo Pro Rebuild • Nghĩa MMO</p>
+          <h1>ALLDOWN iOS Pro</h1>
+          <p id="modeSubtitle">Hybrid Cloud 24/7 + Local • Nghĩa MMO</p>
         </div>
       </div>
       <div class="status-pill">
         <span class="status-dot"></span>
-        <span>NO LOGO HD</span>
+        <span id="engineBadge">24/7 READY</span>
       </div>
     </header>
 
     <!-- ==================== TAB 1: TẢI VIDEO ==================== -->
     <div id="tab-download" class="tab-pane active">
+      <!-- HỘP CÀI PHÍM TẮT 1-CHẠM TRỰC TIẾP VÀO IPHONE -->
+      <div class="glass-card" style="padding: 14px 16px; border-color: rgba(16, 185, 129, 0.45); background: linear-gradient(145deg, rgba(16, 185, 129, 0.14), rgba(24, 26, 38, 0.9));">
+        <div style="font-size: 13px; font-weight: 800; color: #34d399; margin-bottom: 8px; display:flex; align-items:center; justify-content:space-between;">
+          <span>📲 CÀI PHÍM TẮT "NGHĨA MMO DOWNLOAD"</span>
+          <span style="font-size:10.5px; background:rgba(16,185,129,0.2); padding:2px 7px; border-radius:99px;">1-Chạm iOS</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <a href="/nghiammo" class="btn btn-ios-photos" style="text-decoration:none; margin-bottom:0; padding:11px 8px; font-size:12.5px;">
+            ⚡ Nghĩa MMO Download (TikTok + FB)
+          </a>
+          <a href="shortcuts://shortcuts/b44699c7197f40e582072a7c9dd52084" class="btn btn-primary" style="text-decoration:none; padding:11px 8px; font-size:12.5px;">
+            🎬 Nghĩa MMO v2.1 (TikTok + FB HD)
+          </a>
+        </div>
+      </div>
+
       <div class="platform-Segment">
         <button class="seg-btn active" onclick="setPlatformHint('all', this)">🌐 Tự nhận diện</button>
         <button class="seg-btn" onclick="setPlatformHint('tiktok', this)">🎵 TikTok HD</button>
@@ -548,7 +555,7 @@
 
       <div class="glass-card">
         <div class="input-label">
-          <span id="inputHint">Dán link Video / Reels TikTok hoặc Facebook</span>
+          <span id="inputHint">Dán link Video / Reels TikTok, Facebook, IG, X</span>
           <span style="color: var(--accent-tiktok); font-size: 11.5px;">iOS 15–18+</span>
         </div>
 
@@ -573,13 +580,11 @@
         </div>
       </div>
 
-      <!-- Error Banner -->
       <div id="errorBanner" class="error-banner"></div>
 
-      <!-- Loading -->
       <div id="loaderBox" class="loader-box glass-card">
         <div class="spinner"></div>
-        <p style="font-size: 13.5px; color: #cbd5e1; font-weight: 600;">
+        <p id="loaderText" style="font-size: 13.5px; color: #cbd5e1; font-weight: 600;">
           Đang bóc tách luồng Video Gốc Không Logo...
         </p>
       </div>
@@ -591,14 +596,13 @@
         </div>
 
         <div class="media-meta">
-          <img id="authorAvatar" class="author-avatar" src="/icon.svg" alt="avatar" />
+          <img id="authorAvatar" class="author-avatar" src="icon.svg" alt="avatar" />
           <div class="meta-text">
             <h3 id="mediaAuthor">Tác giả</h3>
             <p id="mediaTitle">Tiêu đề video</p>
           </div>
         </div>
 
-        <!-- Nút Lưu thẳng vào Album Ảnh iPhone (iOS Native Share File -> Save Video) -->
         <button class="btn btn-ios-photos" id="saveToPhotosBtn" onclick="saveDirectlyToiOSPhotos()">
           📲 Lưu thẳng vào Album Ảnh iPhone (Photos)
         </button>
@@ -615,58 +619,32 @@
     <!-- ==================== TAB 2: PHÍM TẮT SHARE SHEET ==================== -->
     <div id="tab-shortcut" class="tab-pane">
       <div class="glass-card">
-        <h2 style="font-size: 17px; margin-bottom: 6px;">⚡ Phím Tắt ALLDOWN (SnapVideo iOS)</h2>
-        <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 16px;">
-          Tải video trực tiếp khi bấm nút <b>Chia sẻ (Share)</b> trong ứng dụng TikTok & Facebook trên iPhone giống hệt SnapVideo nhưng không quảng cáo.
+        <h2 style="font-size: 17px; margin-bottom: 6px;">⚡ Bấm Cài Luôn Vào "Phím Tắt" iPhone</h2>
+        <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 14px;">
+          Các liên kết dưới đây đã được <b>Apple iCloud ký số chính thức</b>. Khi bạn bấm vào, iPhone sẽ <b>tự động mở thẳng ứng dụng Phím tắt (Shortcuts)</b> và hiện nút <b>"+ Thêm phím tắt"</b> ngay lập tức!
         </p>
 
-        <div class="step-item">
-          <div class="step-num">1</div>
-          <div class="step-body">
-            <h4>Cách 1: Cài Scriptable Share Sheet (Chạy độc lập 100% trên iPhone)</h4>
-            <p>
-              Tải app <b>Scriptable</b> miễn phí trên App Store, sau đó bấm nút dưới đây để lấy mã nguồn <code>ALLDOWN-iOS-Pro.js</code>. Khi xem TikTok/Facebook chỉ cần bấm <b>Chia sẻ → Scriptable → ALLDOWN</b> là tự lưu vào Album Ảnh!
-            </p>
-            <div style="display:flex; gap:8px; margin-top:10px;">
-              <a href="/api/shortcut/alldown-scriptable.js" class="btn btn-primary" style="text-decoration:none; flex:1; padding:11px; font-size:13px;">
-                📥 Tải Scriptable (.js)
-              </a>
-              <button class="btn btn-paste" style="padding:11px; font-size:13px;" onclick="copyScriptableCode()">
-                📋 Copy Code
-              </button>
-            </div>
-          </div>
-        </div>
+        <a href="/nghiammo" class="btn btn-ios-photos" style="text-decoration:none; margin-bottom:10px;">
+          🚀 1. Cài Phím Tắt Nghĩa MMO Download (TikTok + Facebook + IG)
+        </a>
 
-        <hr style="border:none; border-top:1px solid rgba(255,255,255,0.08); margin:16px 0;" />
+        <a href="shortcuts://shortcuts/b44699c7197f40e582072a7c9dd52084" class="btn btn-primary" style="text-decoration:none; width:100%; margin-bottom:10px;">
+          🎬 2. Cài Phím Tắt Nghĩa MMO Download v2.1 (TikTok + FB)
+        </a>
 
-        <div class="step-item">
-          <div class="step-num">2</div>
-          <div class="step-body">
-            <h4>Cách 2: Tạo Phím Tắt (Apple Shortcuts) 3 Bước Siêu Tốc</h4>
-            <p>Mở ứng dụng <b>Phím tắt (Shortcuts)</b> trên iPhone → Bấm dấu <b>(+)</b> tạo phím tắt mới tên <b>"ALLDOWN Video"</b>, bật <i>"Hiển thị trong Bảng chia sẻ"</i> và thêm đúng 3 hành động:</p>
-            <div class="code-box">
-              B1: Lấy URL từ [Đầu vào Phím tắt]<br/>
-              B2: Lấy nội dung của URL:<br/>
-              <span id="shortcutStreamUrl" style="color:#10b981; font-weight:700;"></span>[URL đã lấy]<br/>
-              B3: Lưu [Nội dung của URL] vào [Album Gần đây]
-            </div>
-            <button class="btn btn-paste" style="width:100%; margin-top:6px; padding:11px; font-size:13px;" onclick="copyShortcutEndpoint()">
-              📋 Sao chép Link API Phím Tắt
-            </button>
-          </div>
-        </div>
+        <a href="shortcuts://shortcuts/f9d6e7635e344a9c9acde9780ba85ed8" class="btn btn-paste" style="text-decoration:none; width:100%; margin-bottom:10px;">
+          🎵 3. Cài Phím Tắt Nghĩa MMO TikTok Pro (Không Logo HD)
+        </a>
 
-        <hr style="border:none; border-top:1px solid rgba(255,255,255,0.08); margin:16px 0;" />
+        <a href="shortcuts://shortcuts/60fd5ab5d341496c9e167207b3633d74" class="btn btn-paste" style="text-decoration:none; width:100%; margin-bottom:16px;">
+          📘 4. Cài Phím Tắt Nghĩa MMO Facebook HD
+        </a>
 
         <div class="step-item" style="margin-bottom:0;">
-          <div class="step-num">3</div>
+          <div class="step-num">✓</div>
           <div class="step-body">
-            <h4>Tải File Cấu Hình Plist (.plist) Gốc</h4>
-            <p>Dành cho nghiên cứu cấu trúc <code>WFWorkflowActions</code> của SnapVideo trên iOS:</p>
-            <a href="/api/shortcut/alldown.plist" class="btn btn-paste" style="text-decoration:none; margin-top:8px; padding:11px; font-size:13px; width:100%;">
-              📦 Tải ALLDOWN-SnapVideo.plist
-            </a>
+            <h4>Cách dùng sau khi bấm "+ Thêm phím tắt":</h4>
+            <p>Mở app <b>TikTok</b> hoặc <b>Facebook</b> → Bấm nút <b>Chia sẻ (Share)</b> → Kéo xuống chọn tên Phím tắt vừa cài → Chọn <b>"Luôn cho phép"</b> → Video tự lưu thẳng vào ứng dụng <b>Ảnh (Photos)</b>!</p>
           </div>
         </div>
       </div>
@@ -675,35 +653,32 @@
     <!-- ==================== TAB 3: CÀI APP LÊN IPHONE ==================== -->
     <div id="tab-install" class="tab-pane">
       <div class="glass-card">
-        <h2 style="font-size: 17px; margin-bottom: 8px;">📲 Cài Đặt Phần Mềm Lên iPhone</h2>
-        <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 16px;">
-          Biến ALLDOWN thành ứng dụng toàn màn hình trên Màn hình chính iPhone (iOS WebApp / PWA) không cần Jailbreak, không lo thu hồi chứng chỉ!
+        <h2 style="font-size: 17px; margin-bottom: 8px;">📲 Cài Đặt Ra Màn Hình Chính iPhone</h2>
+        <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 14px;">
+          Chọn cài đặt Phím tắt iCloud 1-Chạm hoặc cài Hồ sơ WebApp lên Màn hình chính iPhone:
         </p>
+
+        <a href="https://www.icloud.com/shortcuts/971546de23f04e6ba1c8a90a19d576fc" class="btn btn-ios-photos" style="text-decoration:none; margin-bottom:10px;">
+          ⚡ Bấm Cài Luôn Vào App "Phím Tắt" iPhone
+        </a>
+
+        <a href="/ALLDOWN-iOS-App.mobileconfig" class="btn btn-primary" style="text-decoration:none; width:100%; margin-bottom:18px;">
+          📲 Cài Ứng Dụng ALLDOWN Ra Màn Hình Chính (.mobileconfig)
+        </a>
 
         <div class="step-item">
           <div class="step-num">1</div>
           <div class="step-body">
-            <h4>Mở đường dẫn này bằng trình duyệt Safari trên iPhone</h4>
-            <div class="code-box" id="lanInstallUrl">Đang lấy địa chỉ IP Wi-Fi...</div>
-            <button class="btn btn-paste" style="width:100%; padding:10px; font-size:12.5px;" onclick="copyLanUrl()">
-              📋 Sao chép Địa chỉ mở trên iPhone
-            </button>
+            <h4>Link cài nhanh Phím tắt trên iPhone:</h4>
+            <div class="code-box">http://192.168.1.5:3000/snapvideo</div>
           </div>
         </div>
 
-        <div class="step-item">
+        <div class="step-item" style="margin-bottom:0;">
           <div class="step-num">2</div>
           <div class="step-body">
-            <h4>Nhấn nút Chia sẻ (Share) ở thanh dưới cùng Safari</h4>
-            <p>Biểu tượng hình vuông có mũi tên hướng lên <b>[↑]</b> ở chính giữa thanh công cụ Safari iPhone.</p>
-          </div>
-        </div>
-
-        <div class="step-item">
-          <div class="step-num">3</div>
-          <div class="step-body">
-            <h4>Chọn "Thêm vào MH chính" (Add to Home Screen)</h4>
-            <p>Nhấn <b>Thêm (Add)</b> ở góc phải trên cùng. Biểu tượng <b>ALLDOWN</b> sẽ xuất hiện ngay trên màn hình chính iPhone như một App Native thực thụ!</p>
+            <h4>Hoặc bấm nút Chia sẻ [↑] trên Safari → "Thêm vào MH chính"</h4>
+            <p>Ứng dụng ALLDOWN Pro sẽ nằm ngay trên Màn hình chính iPhone của bạn!</p>
           </div>
         </div>
       </div>
@@ -721,7 +696,7 @@
     </div>
   </div>
 
-  <!-- Thanh điều hướng iOS Tab Bar dưới đáy -->
+  <!-- Thanh điều hướng iOS Tab Bar -->
   <nav class="ios-tabbar">
     <button class="tab-item active" onclick="switchTab('download', this)">
       <span class="tab-icon">⬇️</span>
@@ -743,7 +718,7 @@
 
   <script>
     let currentMediaData = null;
-    let serverInfo = null;
+    let hasLocalBackend = false;
 
     const urlInput = document.getElementById('urlInput');
     const clearBtn = document.getElementById('clearBtn');
@@ -769,7 +744,7 @@
         hint.textContent = 'Chế độ Facebook: Tải Reels, Watch & Video Công khai HD';
         urlInput.placeholder = 'https://www.facebook.com/share/v/... hoặc https://fb.watch/...';
       } else {
-        hint.textContent = 'Dán link Video / Reels TikTok hoặc Facebook';
+        hint.textContent = 'Dán link Video / Reels TikTok, Facebook, IG, X';
         urlInput.placeholder = 'https://vt.tiktok.com/... hoặc https://facebook.com/share/v/...';
       }
     }
@@ -806,6 +781,145 @@
       banner.style.display = 'block';
     }
 
+    /**
+     * ========================================================================
+     * CLIENT-SIDE SERVERLESS EXTRACTOR (Chạy trực tiếp trên iPhone 4G/5G 24/7
+     * ngay cả khi không bật máy tính!)
+     * ========================================================================
+     */
+    function extractFirstUrlClient(rawText) {
+      const m = rawText.match(/https?:\/\/[^\s"'<>]+/i);
+      return m ? m[0].trim() : rawText.trim();
+    }
+
+    function decodeFbEscapedClient(raw) {
+      if (!raw) return null;
+      return raw
+        .replace(/\\u0025/g, '%')
+        .replace(/\\u0026/g, '&')
+        .replace(/\\u003C/g, '<')
+        .replace(/\\u003E/g, '>')
+        .replace(/\\u003D/g, '=')
+        .replace(/\\\//g, '/')
+        .replace(/&amp;/g, '&');
+    }
+
+    async function extractClientSideServerless(rawInput) {
+      const cleanUrl = extractFirstUrlClient(rawInput);
+      const lower = cleanUrl.toLowerCase();
+
+      // 1. TikTok / Douyin Serverless (Gọi trực tiếp TikWM CORS API từ iPhone)
+      if (lower.includes('tiktok.com') || lower.includes('douyin.com')) {
+        const body = new URLSearchParams({ url: cleanUrl, hd: '1' });
+        const res = await fetch('https://www.tikwm.com/api/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+          body: body.toString()
+        });
+        const json = await res.json();
+        if (json && json.code === 0 && json.data) {
+          const d = json.data;
+          const fix = (u) => (!u ? null : u.startsWith('http') ? u : 'https://www.tikwm.com' + u);
+          const hdUrl = fix(d.hdplay || d.play);
+          const sdUrl = fix(d.play);
+          const mp3Url = fix(d.music);
+          const qualities = [];
+          if (hdUrl) qualities.push({ badge: 'HD NO-WM', label: 'Video Full HD (Không Logo)', ext: 'mp4', url: hdUrl, size: d.hd_size || d.size });
+          if (sdUrl && sdUrl !== hdUrl) qualities.push({ badge: 'SD NO-WM', label: 'Video Tiêu Chuẩn (Không Logo)', ext: 'mp4', url: sdUrl, size: d.size });
+          if (mp3Url) qualities.push({ badge: 'MP3', label: 'Nhạc nền gốc (Audio MP3)', ext: 'mp3', url: mp3Url });
+
+          return {
+            success: true,
+            platform: 'tiktok',
+            engine: 'iOS-Cloud-Direct (TikWM)',
+            id: d.id || String(Date.now()),
+            title: d.title || 'TikTok Video',
+            author: { name: d.author?.nickname || 'TikTok Creator', avatar: fix(d.author?.avatar) },
+            thumbnail: fix(d.origin_cover || d.cover),
+            isPhotoSlide: Array.isArray(d.images) && d.images.length > 0,
+            images: d.images || [],
+            qualities,
+            bestVideoUrl: hdUrl || sdUrl
+          };
+        }
+        throw new Error('Không bóc tách được link TikTok này.');
+      }
+
+      // 2. Facebook Serverless (Qua Embed Player + AllOrigins CORS Proxy)
+      if (lower.includes('facebook.com') || lower.includes('fb.watch') || lower.includes('fb.com')) {
+        const embedTarget = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(cleanUrl)}&show_text=false&width=734`;
+        const proxyUrls = [
+          `https://api.allorigins.win/raw?url=${encodeURIComponent(embedTarget)}`,
+          `https://api.allorigins.win/raw?url=${encodeURIComponent(cleanUrl)}`
+        ];
+
+        for (const pUrl of proxyUrls) {
+          try {
+            const r = await fetch(pUrl);
+            const html = await r.text();
+            const hdMatch =
+              html.match(/"browser_native_hd_url"\s*:\s*"([^"]+)"/) ||
+              html.match(/"playable_url_quality_hd"\s*:\s*"([^"]+)"/) ||
+              html.match(/"hd_src_no_ratelimit"\s*:\s*"([^"]+)"/) ||
+              html.match(/"hd_src"\s*:\s*"([^"]+)"/);
+            const sdMatch =
+              html.match(/"browser_native_sd_url"\s*:\s*"([^"]+)"/) ||
+              html.match(/"playable_url"\s*:\s*"([^"]+)"/) ||
+              html.match(/"sd_src_no_ratelimit"\s*:\s*"([^"]+)"/) ||
+              html.match(/"sd_src"\s*:\s*"([^"]+)"/);
+
+            const hdUrl = hdMatch && hdMatch[1] !== 'null' ? decodeFbEscapedClient(hdMatch[1]) : null;
+            const sdUrl = sdMatch && sdMatch[1] !== 'null' ? decodeFbEscapedClient(sdMatch[1]) : null;
+
+            if (hdUrl || sdUrl) {
+              const qualities = [];
+              if (hdUrl) qualities.push({ badge: 'FB HD', label: 'Facebook Full HD', ext: 'mp4', url: hdUrl });
+              if (sdUrl) qualities.push({ badge: 'FB SD', label: 'Facebook Tiêu Chuẩn (SD)', ext: 'mp4', url: sdUrl });
+              return {
+                success: true,
+                platform: 'facebook',
+                engine: 'iOS-Cloud-Direct (FB Embed)',
+                id: String(Date.now()),
+                title: 'Facebook Watch / Reels HD',
+                author: { name: 'Facebook Video', avatar: 'icon.svg' },
+                thumbnail: null,
+                isPhotoSlide: false,
+                images: [],
+                qualities,
+                bestVideoUrl: hdUrl || sdUrl
+              };
+            }
+          } catch {}
+        }
+        throw new Error('Video Facebook này cần mở qua Local Server hoặc đang ở chế độ Riêng tư.');
+      }
+
+      // 3. X / Twitter Serverless
+      if (lower.includes('x.com') || lower.includes('twitter.com')) {
+        const m = cleanUrl.match(/status\/(\d+)/);
+        if (m) {
+          const r = await fetch(`https://api.vxtwitter.com/Twitter/status/${m[1]}`);
+          const d = await r.json();
+          const v = (d.media_extended || []).find((x) => x.type === 'video' || x.type === 'gif');
+          if (v && v.url) {
+            return {
+              success: true,
+              platform: 'twitter',
+              engine: 'iOS-Cloud-Direct (VX)',
+              id: m[1],
+              title: d.text || 'X Video',
+              author: { name: d.user_name || 'X User', avatar: d.user_profile_image_url },
+              thumbnail: v.thumbnail_url,
+              qualities: [{ badge: 'X HD', label: 'X / Twitter Video HD', ext: 'mp4', url: v.url }],
+              bestVideoUrl: v.url
+            };
+          }
+        }
+      }
+
+      throw new Error('Vui lòng dán link TikTok, Facebook (Watch/Reels) hoặc X/Twitter hợp lệ!');
+    }
+
     async function handleExtract() {
       const rawUrl = urlInput.value.trim();
       if (!rawUrl) {
@@ -818,26 +932,38 @@
       document.getElementById('loaderBox').style.display = 'block';
 
       try {
-        const res = await fetch('/api/extract', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url: rawUrl })
-        });
-        const data = await res.json();
-        document.getElementById('loaderBox').style.display = 'none';
-
-        if (!res.ok || !data.success) {
-          showError(data.error || 'Không thể phân tích đường dẫn này.');
-          return;
+        let data = null;
+        if (hasLocalBackend) {
+          try {
+            const res = await fetch('/api/extract', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ url: rawUrl })
+            });
+            data = await res.json();
+            if (!res.ok || !data.success) throw new Error(data.error || 'Fallback');
+          } catch {
+            data = await extractClientSideServerless(rawUrl);
+          }
+        } else {
+          data = await extractClientSideServerless(rawUrl);
         }
 
+        document.getElementById('loaderBox').style.display = 'none';
         currentMediaData = data;
         saveToHistory(data, rawUrl);
         renderResult(data);
       } catch (err) {
         document.getElementById('loaderBox').style.display = 'none';
-        showError('Lỗi kết nối tới máy chủ ALLDOWN: ' + err.message);
+        showError(err.message || 'Không thể phân tích đường dẫn này.');
       }
+    }
+
+    function getDownloadHref(rawMediaUrl, ext, platform) {
+      if (hasLocalBackend) {
+        return `/api/proxy-download?url=${encodeURIComponent(rawMediaUrl)}&ext=${ext}&platform=${platform}`;
+      }
+      return rawMediaUrl;
     }
 
     function renderResult(data) {
@@ -851,7 +977,7 @@
       const slideContainer = document.getElementById('photoSlideContainer');
       const photoGrid = document.getElementById('photoGrid');
 
-      avatar.src = data.author?.avatar || '/icon.svg';
+      avatar.src = data.author?.avatar || 'icon.svg';
       author.textContent =
         (data.platform === 'tiktok' ? '🎵 ' : '📘 ') +
         (data.author?.name || 'Video Creator') +
@@ -860,41 +986,27 @@
 
       if (data.bestVideoUrl) {
         videoWrap.style.display = 'flex';
-        const proxyStreamUrl = `/api/proxy-download?url=${encodeURIComponent(
-          data.bestVideoUrl
-        )}&ext=mp4&platform=${data.platform}`;
-        videoPlayer.src = proxyStreamUrl;
+        videoPlayer.src = getDownloadHref(data.bestVideoUrl, 'mp4', data.platform);
         if (data.thumbnail) videoPlayer.poster = data.thumbnail;
       } else {
         videoWrap.style.display = 'none';
       }
 
-      // Nếu là bài đăng Slide Ảnh TikTok
       if (data.isPhotoSlide && Array.isArray(data.images) && data.images.length > 0) {
         slideContainer.style.display = 'block';
         photoGrid.innerHTML = data.images
-          .map(
-            (imgUrl, idx) =>
-              `<a href="${imgUrl}" target="_blank"><img src="${imgUrl}" alt="Slide ${
-                idx + 1
-              }" /></a>`
-          )
+          .map((imgUrl, idx) => `<a href="${imgUrl}" target="_blank"><img src="${imgUrl}" alt="Slide ${idx + 1}" /></a>`)
           .join('');
       } else {
         slideContainer.style.display = 'none';
       }
 
-      // Danh sách các chất lượng tải
       qList.innerHTML = (data.qualities || [])
         .map((q) => {
-          const proxyUrl = `/api/proxy-download?url=${encodeURIComponent(
-            q.url
-          )}&ext=${q.ext}&platform=${data.platform}`;
-          const sizeStr = q.size
-            ? ` (${(q.size / (1024 * 1024)).toFixed(1)} MB)`
-            : '';
+          const dlHref = getDownloadHref(q.url, q.ext, data.platform);
+          const sizeStr = q.size ? ` (${(q.size / (1024 * 1024)).toFixed(1)} MB)` : '';
           return `
-            <a class="quality-item" href="${proxyUrl}" download>
+            <a class="quality-item" href="${dlHref}" target="_blank" download>
               <div class="q-left">
                 <span class="q-badge ${q.ext === 'mp3' ? 'mp3' : ''}">${q.badge}</span>
                 <span class="q-label">${q.label}${sizeStr}</span>
@@ -909,22 +1021,19 @@
     }
 
     /**
-     * Tính năng Đặc Biệt cho iPhone (iOS 15+):
-     * Tải Blob MP4 về bộ nhớ tạm rồi bật iOS Native Share Sheet -> Bấm "Lưu video" (Save Video) thẳng vào ứng dụng Ảnh (Photos)!
+     * Lưu thẳng vào Album Ảnh iPhone (Photos) qua Web Share API Level 2 (iOS 15+)
      */
     async function saveDirectlyToiOSPhotos() {
       if (!currentMediaData || !currentMediaData.bestVideoUrl) return;
       const btn = document.getElementById('saveToPhotosBtn');
       const oldText = btn.textContent;
-      btn.textContent = '⏳ Đang chuẩn bị file MP4 cho Album Ảnh iPhone...';
+      btn.textContent = '⏳ Đang tải MP4 chuẩn bị lưu vào Album Ảnh iPhone...';
       btn.disabled = true;
 
-      const proxyUrl = `/api/proxy-download?url=${encodeURIComponent(
-        currentMediaData.bestVideoUrl
-      )}&ext=mp4&platform=${currentMediaData.platform}`;
+      const targetUrl = getDownloadHref(currentMediaData.bestVideoUrl, 'mp4', currentMediaData.platform);
 
       try {
-        const response = await fetch(proxyUrl);
+        const response = await fetch(targetUrl);
         const blob = await response.blob();
         const fileName = `ALLDOWN_${currentMediaData.platform}_${Date.now()}.mp4`;
         const file = new File([blob], fileName, { type: 'video/mp4' });
@@ -932,10 +1041,9 @@
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           await navigator.share({
             files: [file],
-            title: 'ALLDOWN iOS Video'
+            title: 'ALLDOWN iOS Pro'
           });
         } else {
-          // Fallback: kích hoạt tải file trực tiếp
           const a = document.createElement('a');
           a.href = URL.createObjectURL(blob);
           a.download = fileName;
@@ -945,7 +1053,7 @@
         }
       } catch (e) {
         if (e.name !== 'AbortError') {
-          window.location.href = proxyUrl;
+          window.open(currentMediaData.bestVideoUrl, '_blank');
         }
       } finally {
         btn.textContent = oldText;
@@ -960,7 +1068,6 @@
           id: data.id,
           platform: data.platform,
           title: data.title,
-          author: data.author?.name || '',
           url: rawUrl,
           time: new Date().toLocaleString('vi-VN')
         });
@@ -1008,44 +1115,34 @@
       renderHistory();
     }
 
-    async function loadServerInfo() {
+    async function checkBackendStatus() {
       try {
-        const res = await fetch('/api/info');
-        serverInfo = await res.json();
-        document.getElementById('lanInstallUrl').textContent = serverInfo.lanUrl;
-        document.getElementById('shortcutStreamUrl').textContent =
-          serverInfo.shortcutEndpoint;
+        const controller = new AbortController();
+        setTimeout(() => controller.abort(), 1800);
+        const res = await fetch('/api/info', { signal: controller.signal });
+        if (res.ok) {
+          const info = await res.json();
+          hasLocalBackend = true;
+          document.getElementById('lanInstallUrl').textContent = info.lanUrl;
+          document.getElementById('engineBadge').textContent = 'SERVER + CLOUD';
+        }
       } catch {
-        document.getElementById('lanInstallUrl').textContent = window.location.origin;
-        document.getElementById('shortcutStreamUrl').textContent =
-          window.location.origin + '/api/direct-stream?url=';
+        hasLocalBackend = false;
+        document.getElementById('engineBadge').textContent = 'CLOUD 24/7';
       }
     }
 
-    async function copyShortcutEndpoint() {
-      const text = document.getElementById('shortcutStreamUrl').textContent;
-      await navigator.clipboard.writeText(text);
-      alert('Đã sao chép Link API Phím tắt: ' + text);
-    }
-
-    async function copyLanUrl() {
-      const text = document.getElementById('lanInstallUrl').textContent;
-      await navigator.clipboard.writeText(text);
-      alert('Đã sao chép địa chỉ cài App iPhone: ' + text);
-    }
-
     async function copyScriptableCode() {
-      const res = await fetch('/api/shortcut/alldown-scriptable.js');
+      const res = await fetch('ALLDOWN-iOS-Pro.js');
       const code = await res.text();
       await navigator.clipboard.writeText(code);
-      alert('Đã sao chép toàn bộ code Scriptable iOS! Bạn chỉ cần mở app Scriptable trên iPhone và Dán (Paste).');
+      alert('Đã sao chép code Scriptable iOS! Mở app Scriptable trên iPhone và Dán (Paste).');
     }
 
-    // Tự động nhận diện nếu mở qua Share Target hoặc ?url=...
-    window.addEventListener('DOMContentLoaded', () => {
-      loadServerInfo();
+    window.addEventListener('DOMContentLoaded', async () => {
+      await checkBackendStatus();
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
+        navigator.serviceWorker.register('sw.js').catch(() => {});
       }
       const params = new URLSearchParams(window.location.search);
       const sharedUrl = params.get('url') || params.get('text');
@@ -1058,4 +1155,3 @@
   </script>
 </body>
 </html>
-

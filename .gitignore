@@ -4,3 +4,4 @@ ios-native-swiftui/Payload/
 ios-native-swiftui/*.xcodeproj
 .DS_Store
 *.log
+

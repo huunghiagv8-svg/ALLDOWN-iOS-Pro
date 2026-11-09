@@ -26,7 +26,9 @@ const MIME_TYPES = {
   '.png': 'image/png',
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon',
-  '.plist': 'application/x-plist'
+  '.plist': 'application/x-plist',
+  '.mobileconfig': 'application/x-apple-aspen-config',
+  '.ipa': 'application/octet-stream'
 };
 
 function getLocalLanIp() {
@@ -102,6 +104,36 @@ const server = http.createServer(async (req, res) => {
         shortcutEndpoint: `http://${lanIp}:${PORT}/api/direct-stream?url=`,
         extractEndpoint: `http://${lanIp}:${PORT}/api/extract`
       });
+    }
+
+    // 1b. Direct 1-Tap iCloud Shortcut Landing Page ("Nghĩa MMO Download" OpenGraph + Auto DeepLink)
+    if (
+      pathname === '/nghiammo' ||
+      pathname === '/install-shortcut' ||
+      pathname === '/snapvideo'
+    ) {
+      const landingPath = path.join(PUBLIC_DIR, 'nghia-mmo-download.html');
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      fs.createReadStream(landingPath).pipe(res);
+      return;
+    }
+    if (pathname === '/install-tdownload') {
+      res.writeHead(302, {
+        Location: 'https://www.icloud.com/shortcuts/b44699c7197f40e582072a7c9dd52084'
+      });
+      return res.end();
+    }
+    if (pathname === '/install-dtiktok') {
+      res.writeHead(302, {
+        Location: 'https://www.icloud.com/shortcuts/f9d6e7635e344a9c9acde9780ba85ed8'
+      });
+      return res.end();
+    }
+    if (pathname === '/install-fb') {
+      res.writeHead(302, {
+        Location: 'https://www.icloud.com/shortcuts/60fd5ab5d341496c9e167207b3633d74'
+      });
+      return res.end();
     }
 
     // 2. Extract Media Metadata API (GET & POST) - Dùng cho cả Web App iOS & Apple Shortcuts
