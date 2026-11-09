@@ -1,0 +1,22 @@
+{
+  "name": "alldown-ios-snapvideo",
+  "version": "2.0.0",
+  "description": "ALLDOWN iOS - Ung dung & Phim tat tai Video TikTok (No Watermark HD) & Facebook (Reels/Watch HD) cho iPhone (Rebuild tu SnapVideo)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test-extractor.js"
+  },
+  "keywords": [
+    "ios",
+    "iphone",
+    "snapvideo",
+    "tiktok-downloader",
+    "facebook-downloader",
+    "apple-shortcuts",
+    "pwa"
+  ],
+  "author": "Nghia MMO",
+  "license": "MIT"
+}
+

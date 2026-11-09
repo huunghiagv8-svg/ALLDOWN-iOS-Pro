@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>ALLDOWN iOS Pro — Tải Video TikTok & Facebook Không Logo</title>
+
+  <!-- Cấu hình iOS Standalone App (Add to Home Screen) -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="ALLDOWN" />
+  <meta name="theme-color" content="#090A0F" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/icon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+
+  <style>
+    :root {
+      --bg-primary: #090a0f;
+      --bg-card: rgba(24, 26, 38, 0.78);
+      --bg-card-solid: #151722;
+      --border-glass: rgba(255, 255, 255, 0.1);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-tiktok: #00f2fe;
+      --accent-pink: #ff0050;
+      --accent-fb: #1877f2;
+      --accent-purple: #8b5cf6;
+      --accent-green: #10b981;
+      --safe-top: env(safe-area-inset-top, 20px);
+      --safe-bottom: env(safe-area-inset-bottom, 20px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(0, 242, 254, 0.14), transparent 35%),
+        radial-gradient(circle at 85% 15%, rgba(255, 0, 80, 0.14), transparent 35%),
+        radial-gradient(circle at 50% 80%, rgba(24, 119, 242, 0.12), transparent 45%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding-top: calc(var(--safe-top) + 12px);
+      padding-bottom: calc(var(--safe-bottom) + 90px);
+      overflow-x: hidden;
+    }
+
+    .app-container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* iOS Header */
+    .ios-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #00f2fe 0%, #ff0050 55%, #1877f2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(255, 0, 80, 0.3);
+      font-weight: 900;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .brand-title h1 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      background: linear-gradient(90deg, #fff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-title p {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34d399;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    /* Platform Badges */
+    .platform-Segment {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 4px;
+      border-radius: 14px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border-glass);
+    }
+
+    .seg-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 9px 6px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .seg-btn.active {
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Glass Card */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glass);
+      border-radius: 22px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    .input-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .url-input {
+      width: 100%;
+      background: rgba(9, 10, 15, 0.75);
+      border: 1.5px solid rgba(255, 255, 255, 0.14);
+      border-radius: 16px;
+      padding: 15px 44px 15px 15px;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .url-input:focus {
+      border-color: var(--accent-tiktok);
+    }
+
+    .clear-btn {
+      position: absolute;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #cbd5e1;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 13px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 10px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 15px;
+      padding: 14px 16px;
+      font-size: 14.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.12s ease, opacity 0.2s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-paste {
+      background: rgba(255, 255, 255, 0.1);
+      color: #f1f5f9;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00f2fe 0%, #ec4899 55%, #6366f1 100%);
+      color: #fff;
+      box-shadow: 0 8px 22px rgba(236, 72, 153, 0.35);
+    }
+
+    .btn-ios-photos {
+      width: 100%;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #fff;
+      margin-bottom: 10px;
+      padding: 15px;
+      font-size: 15px;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Loading Spinner */
+    .loader-box {
+      display: none;
+      text-align: center;
+      padding: 20px 10px;
+    }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3.5px solid rgba(255, 255, 255, 0.15);
+      border-top-color: var(--accent-tiktok);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+      margin: 0 auto 10px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Alert / Error */
+    .error-banner {
+      display: none;
+      background: rgba(239, 68, 68, 0.16);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 13.5px;
+      margin-bottom: 14px;
+      line-height: 1.45;
+    }
+
+    /* Result Card */
+    #resultSection {
+      display: none;
+    }
+
+    .video-preview-wrap {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000;
+      margin-bottom: 14px;
+      max-height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-preview-wrap video {
+      width: 100%;
+      max-height: 340px;
+      object-fit: contain;
+    }
+
+    .media-meta {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .author-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #334155;
+      flex-shrink: 0;
+    }
+
+    .meta-text h3 {
+      font-size: 14.5px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+
+    .meta-text p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .quality-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .quality-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 12px 14px;
+      border-radius: 14px;
+      text-decoration: none;
+      color: #fff;
+      transition: background 0.2s;
+    }
+
+    .quality-item:active {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .q-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .q-badge {
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 7px;
+      background: rgba(0, 242, 254, 0.18);
+      color: #00f2fe;
+      border: 1px solid rgba(0, 242, 254, 0.35);
+    }
+
+    .q-badge.mp3 {
+      background: rgba(236, 72, 153, 0.18);
+      color: #f472b6;
+      border-color: rgba(236, 72, 153, 0.35);
+    }
+
+    .q-label {
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+
+    .q-dl-btn {
+      background: rgba(255, 255, 255, 0.12);
+      border: none;
+      color: #fff;
+      padding: 7px 12px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Steps & Shortcut Section */
+    .step-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00f2fe, #6366f1);
+      color: #090a0f;
+      font-weight: 800;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-body h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .step-body p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .code-box {
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: #38bdf8;
+      word-break: break-all;
+      margin: 8px 0;
+    }
+
+    /* Tab Views */
+    .tab-pane {
+      display: none;
+    }
+    .tab-pane.active {
+      display: block;
+    }
+
+    /* Bottom iOS Tab Bar */
+    .ios-tabbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 17, 26, 0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 8px 12px calc(var(--safe-bottom) + 6px);
+      display: flex;
+      justify-content: space-around;
+      z-index: 100;
+    }
+
+    .tab-item {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 4px 12px;
+    }
+
+    .tab-item.active {
+      color: var(--accent-tiktok);
+    }
+
+    .tab-icon {
+      font-size: 20px;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .photo-grid img {
+      width: 100%;
+      border-radius: 12px;
+      aspect-ratio: 9/16;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="ios-header">
+      <div class="brand">
+        <div class="brand-logo">↓</div>
+        <div class="brand-title">
+          <h1>ALLDOWN iOS</h1>
+          <p>SnapVideo Pro Rebuild • Nghĩa MMO</p>
+        </div>
+      </div>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span>NO LOGO HD</span>
+      </div>
+    </header>
+
+    <!-- ==================== TAB 1: TẢI VIDEO ==================== -->
+    <div id="tab-download" class="tab-pane active">
+      <div class="platform-Segment">
+        <button class="seg-btn active" onclick="setPlatformHint('all', this)">🌐 Tự nhận diện</button>
+        <button class="seg-btn" onclick="setPlatformHint('tiktok', this)">🎵 TikTok HD</button>
+        <button class="seg-btn" onclick="setPlatformHint('facebook', this)">📘 Facebook HD</button>
+      </div>
+
+      <div class="glass-card">
+        <div class="input-label">
+          <span id="inputHint">Dán link Video / Reels TikTok hoặc Facebook</span>
+          <span style="color: var(--accent-tiktok); font-size: 11.5px;">iOS 15–18+</span>
+        </div>
+
+        <div class="input-wrapper">
+          <input
+            type="url"
+            id="urlInput"
+            class="url-input"
+            placeholder="https://vt.tiktok.com/... hoặc https://facebook.com/share/v/..."
+            autocomplete="off"
+          />
+          <button id="clearBtn" class="clear-btn" onclick="clearInput()">✕</button>
+        </div>
+
+        <div class="action-row">
+          <button class="btn btn-paste" onclick="pasteFromClipboard()">
+            📋 Dán Link
+          </button>
+          <button class="btn btn-primary" id="extractBtn" onclick="handleExtract()">
+            ⚡ Lấy Video HD
+          </button>
+        </div>
+      </div>
+
+      <!-- Error Banner -->
+      <div id="errorBanner" class="error-banner"></div>
+
+      <!-- Loading -->
+      <div id="loaderBox" class="loader-box glass-card">
+        <div class="spinner"></div>
+        <p style="font-size: 13.5px; color: #cbd5e1; font-weight: 600;">
+          Đang bóc tách luồng Video Gốc Không Logo...
+        </p>
+      </div>
+
+      <!-- Result Section -->
+      <div id="resultSection" class="glass-card">
+        <div class="video-preview-wrap" id="videoPreviewWrap">
+          <video id="videoPlayer" controls playsinline preload="metadata"></video>
+        </div>
+
+        <div class="media-meta">
+          <img id="authorAvatar" class="author-avatar" src="/icon.svg" alt="avatar" />
+          <div class="meta-text">
+            <h3 id="mediaAuthor">Tác giả</h3>
+            <p id="mediaTitle">Tiêu đề video</p>
+          </div>
+        </div>
+
+        <!-- Nút Lưu thẳng vào Album Ảnh iPhone (iOS Native Share File -> Save Video) -->
+        <button class="btn btn-ios-photos" id="saveToPhotosBtn" onclick="saveDirectlyToiOSPhotos()">
+          📲 Lưu thẳng vào Album Ảnh iPhone (Photos)
+        </button>
+
+        <div id="photoSlideContainer" style="display:none; margin-bottom:12px;">
+          <h4 style="font-size:13px; margin-bottom:8px; color:#38bdf8;">📸 Bộ Ảnh Slide TikTok (Chạm giữ ảnh để Lưu):</h4>
+          <div id="photoGrid" class="photo-grid"></div>
+        </div>
+
+        <div class="quality-list" id="qualityList"></div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 2: PHÍM TẮT SHARE SHEET ==================== -->
+    <div id="tab-shortcut" class="tab-pane">
+      <div class="glass-card">
+        <h2 style="font-size: 17px; margin-bottom: 6px;">⚡ Phím Tắt ALLDOWN (SnapVideo iOS)</h2>
+        <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 16px;">
+          Tải video trực tiếp khi bấm nút <b>Chia sẻ (Share)</b> trong ứng dụng TikTok & Facebook trên iPhone giống hệt SnapVideo nhưng không quảng cáo.
+        </p>
+
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Cách 1: Cài Scriptable Share Sheet (Chạy độc lập 100% trên iPhone)</h4>
+            <p>
+              Tải app <b>Scriptable</b> miễn phí trên App Store, sau đó bấm nút dưới đây để lấy mã nguồn <code>ALLDOWN-iOS-Pro.js</code>. Khi xem TikTok/Facebook chỉ cần bấm <b>Chia sẻ → Scriptable → ALLDOWN</b> là tự lưu vào Album Ảnh!
+            </p>
+            <div style="display:flex; gap:8px; margin-top:10px;">
+              <a href="/api/shortcut/alldown-scriptable.js" class="btn btn-primary" style="text-decoration:none; flex:1; padding:11px; font-size:13px;">
+                📥 Tải Scriptable (.js)
+              </a>
+              <button class="btn btn-paste" style="padding:11px; font-size:13px;" onclick="copyScriptableCode()">
+                📋 Copy Code
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <hr style="border:none; border-top:1px solid rgba(255,255,255,0.08); margin:16px 0;" />
+
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Cách 2: Tạo Phím Tắt (Apple Shortcuts) 3 Bước Siêu Tốc</h4>
+            <p>Mở ứng dụng <b>Phím tắt (Shortcuts)</b> trên iPhone → Bấm dấu <b>(+)</b> tạo phím tắt mới tên <b>"ALLDOWN Video"</b>, bật <i>"Hiển thị trong Bảng chia sẻ"</i> và thêm đúng 3 hành động:</p>
+            <div class="code-box">
+              B1: Lấy URL từ [Đầu vào Phím tắt]<br/>
+              B2: Lấy nội dung của URL:<br/>
+              <span id="shortcutStreamUrl" style="color:#10b981; font-weight:700;"></span>[URL đã lấy]<br/>
+              B3: Lưu [Nội dung của URL] vào [Album Gần đây]
+            </div>
+            <button class="btn btn-paste" style="width:100%; margin-top:6px; padding:11px; font-size:13px;" onclick="copyShortcutEndpoint()">
+              📋 Sao chép Link API Phím Tắt
+            </button>
+          </div>
+        </div>
+
+        <hr style="border:none; border-top:1px solid rgba(255,255,255,0.08); margin:16px 0;" />
+
+        <div class="step-item" style="margin-bottom:0;">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Tải File Cấu Hình Plist (.plist) Gốc</h4>
+            <p>Dành cho nghiên cứu cấu trúc <code>WFWorkflowActions</code> của SnapVideo trên iOS:</p>
+            <a href="/api/shortcut/alldown.plist" class="btn btn-paste" style="text-decoration:none; margin-top:8px; padding:11px; font-size:13px; width:100%;">
+              📦 Tải ALLDOWN-SnapVideo.plist
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: CÀI APP LÊN IPHONE ==================== -->
+    <div id="tab-install" class="tab-pane">
+      <div class="glass-card">
+        <h2 style="font-size: 17px; margin-bottom: 8px;">📲 Cài Đặt Phần Mềm Lên iPhone</h2>
+        <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 16px;">
+          Biến ALLDOWN thành ứng dụng toàn màn hình trên Màn hình chính iPhone (iOS WebApp / PWA) không cần Jailbreak, không lo thu hồi chứng chỉ!
+        </p>
+
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Mở đường dẫn này bằng trình duyệt Safari trên iPhone</h4>
+            <div class="code-box" id="lanInstallUrl">Đang lấy địa chỉ IP Wi-Fi...</div>
+            <button class="btn btn-paste" style="width:100%; padding:10px; font-size:12.5px;" onclick="copyLanUrl()">
+              📋 Sao chép Địa chỉ mở trên iPhone
+            </button>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Nhấn nút Chia sẻ (Share) ở thanh dưới cùng Safari</h4>
+            <p>Biểu tượng hình vuông có mũi tên hướng lên <b>[↑]</b> ở chính giữa thanh công cụ Safari iPhone.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Chọn "Thêm vào MH chính" (Add to Home Screen)</h4>
+            <p>Nhấn <b>Thêm (Add)</b> ở góc phải trên cùng. Biểu tượng <b>ALLDOWN</b> sẽ xuất hiện ngay trên màn hình chính iPhone như một App Native thực thụ!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: LỊCH SỬ TẢI ==================== -->
+    <div id="tab-history" class="tab-pane">
+      <div class="glass-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <h2 style="font-size: 17px;">🕘 Lịch Sử Đã Tải Trên Máy</h2>
+          <button class="q-dl-btn" onclick="clearHistory()">Xóa hết</button>
+        </div>
+        <div id="historyList" class="quality-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thanh điều hướng iOS Tab Bar dưới đáy -->
+  <nav class="ios-tabbar">
+    <button class="tab-item active" onclick="switchTab('download', this)">
+      <span class="tab-icon">⬇️</span>
+      <span>Tải Video</span>
+    </button>
+    <button class="tab-item" onclick="switchTab('shortcut', this)">
+      <span class="tab-icon">⚡</span>
+      <span>Phím Tắt iOS</span>
+    </button>
+    <button class="tab-item" onclick="switchTab('install', this)">
+      <span class="tab-icon">📲</span>
+      <span>Cài App iPhone</span>
+    </button>
+    <button class="tab-item" onclick="switchTab('history', this)">
+      <span class="tab-icon">🕘</span>
+      <span>Lịch Sử</span>
+    </button>
+  </nav>
+
+  <script>
+    let currentMediaData = null;
+    let serverInfo = null;
+
+    const urlInput = document.getElementById('urlInput');
+    const clearBtn = document.getElementById('clearBtn');
+
+    urlInput.addEventListener('input', () => {
+      clearBtn.style.display = urlInput.value.trim() ? 'flex' : 'none';
+    });
+
+    function clearInput() {
+      urlInput.value = '';
+      clearBtn.style.display = 'none';
+      urlInput.focus();
+    }
+
+    function setPlatformHint(mode, btn) {
+      document.querySelectorAll('.seg-btn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const hint = document.getElementById('inputHint');
+      if (mode === 'tiktok') {
+        hint.textContent = 'Chế độ TikTok: Tải Video Full HD Không Logo & Nhạc MP3';
+        urlInput.placeholder = 'https://vt.tiktok.com/... hoặc https://www.tiktok.com/@user/video/...';
+      } else if (mode === 'facebook') {
+        hint.textContent = 'Chế độ Facebook: Tải Reels, Watch & Video Công khai HD';
+        urlInput.placeholder = 'https://www.facebook.com/share/v/... hoặc https://fb.watch/...';
+      } else {
+        hint.textContent = 'Dán link Video / Reels TikTok hoặc Facebook';
+        urlInput.placeholder = 'https://vt.tiktok.com/... hoặc https://facebook.com/share/v/...';
+      }
+    }
+
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-pane').forEach((p) => p.classList.remove('active'));
+      document.querySelectorAll('.tab-item').forEach((b) => b.classList.remove('active'));
+      document.getElementById('tab-' + tabId).classList.add('active');
+      btn.classList.add('active');
+      if (tabId === 'history') renderHistory();
+    }
+
+    async function pasteFromClipboard() {
+      try {
+        const text = await navigator.clipboard.readText();
+        if (text) {
+          urlInput.value = text.trim();
+          clearBtn.style.display = 'flex';
+          handleExtract();
+        }
+      } catch {
+        urlInput.focus();
+        alert('Hãy chạm giữ vào ô nhập và chọn "Dán" (Paste) trên iPhone!');
+      }
+    }
+
+    function showError(msg) {
+      const banner = document.getElementById('errorBanner');
+      if (!msg) {
+        banner.style.display = 'none';
+        return;
+      }
+      banner.textContent = '⚠️ ' + msg;
+      banner.style.display = 'block';
+    }
+
+    async function handleExtract() {
+      const rawUrl = urlInput.value.trim();
+      if (!rawUrl) {
+        showError('Vui lòng dán link TikTok hoặc Facebook cần tải!');
+        return;
+      }
+
+      showError(null);
+      document.getElementById('resultSection').style.display = 'none';
+      document.getElementById('loaderBox').style.display = 'block';
+
+      try {
+        const res = await fetch('/api/extract', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url: rawUrl })
+        });
+        const data = await res.json();
+        document.getElementById('loaderBox').style.display = 'none';
+
+        if (!res.ok || !data.success) {
+          showError(data.error || 'Không thể phân tích đường dẫn này.');
+          return;
+        }
+
+        currentMediaData = data;
+        saveToHistory(data, rawUrl);
+        renderResult(data);
+      } catch (err) {
+        document.getElementById('loaderBox').style.display = 'none';
+        showError('Lỗi kết nối tới máy chủ ALLDOWN: ' + err.message);
+      }
+    }
+
+    function renderResult(data) {
+      const resultSec = document.getElementById('resultSection');
+      const videoPlayer = document.getElementById('videoPlayer');
+      const videoWrap = document.getElementById('videoPreviewWrap');
+      const avatar = document.getElementById('authorAvatar');
+      const author = document.getElementById('mediaAuthor');
+      const title = document.getElementById('mediaTitle');
+      const qList = document.getElementById('qualityList');
+      const slideContainer = document.getElementById('photoSlideContainer');
+      const photoGrid = document.getElementById('photoGrid');
+
+      avatar.src = data.author?.avatar || '/icon.svg';
+      author.textContent =
+        (data.platform === 'tiktok' ? '🎵 ' : '📘 ') +
+        (data.author?.name || 'Video Creator') +
+        (data.engine ? ` • [${data.engine}]` : '');
+      title.textContent = data.title || '';
+
+      if (data.bestVideoUrl) {
+        videoWrap.style.display = 'flex';
+        const proxyStreamUrl = `/api/proxy-download?url=${encodeURIComponent(
+          data.bestVideoUrl
+        )}&ext=mp4&platform=${data.platform}`;
+        videoPlayer.src = proxyStreamUrl;
+        if (data.thumbnail) videoPlayer.poster = data.thumbnail;
+      } else {
+        videoWrap.style.display = 'none';
+      }
+
+      // Nếu là bài đăng Slide Ảnh TikTok
+      if (data.isPhotoSlide && Array.isArray(data.images) && data.images.length > 0) {
+        slideContainer.style.display = 'block';
+        photoGrid.innerHTML = data.images
+          .map(
+            (imgUrl, idx) =>
+              `<a href="${imgUrl}" target="_blank"><img src="${imgUrl}" alt="Slide ${
+                idx + 1
+              }" /></a>`
+          )
+          .join('');
+      } else {
+        slideContainer.style.display = 'none';
+      }
+
+      // Danh sách các chất lượng tải
+      qList.innerHTML = (data.qualities || [])
+        .map((q) => {
+          const proxyUrl = `/api/proxy-download?url=${encodeURIComponent(
+            q.url
+          )}&ext=${q.ext}&platform=${data.platform}`;
+          const sizeStr = q.size
+            ? ` (${(q.size / (1024 * 1024)).toFixed(1)} MB)`
+            : '';
+          return `
+            <a class="quality-item" href="${proxyUrl}" download>
+              <div class="q-left">
+                <span class="q-badge ${q.ext === 'mp3' ? 'mp3' : ''}">${q.badge}</span>
+                <span class="q-label">${q.label}${sizeStr}</span>
+              </div>
+              <span class="q-dl-btn">Tải về ↓</span>
+            </a>
+          `;
+        })
+        .join('');
+
+      resultSec.style.display = 'block';
+    }
+
+    /**
+     * Tính năng Đặc Biệt cho iPhone (iOS 15+):
+     * Tải Blob MP4 về bộ nhớ tạm rồi bật iOS Native Share Sheet -> Bấm "Lưu video" (Save Video) thẳng vào ứng dụng Ảnh (Photos)!
+     */
+    async function saveDirectlyToiOSPhotos() {
+      if (!currentMediaData || !currentMediaData.bestVideoUrl) return;
+      const btn = document.getElementById('saveToPhotosBtn');
+      const oldText = btn.textContent;
+      btn.textContent = '⏳ Đang chuẩn bị file MP4 cho Album Ảnh iPhone...';
+      btn.disabled = true;
+
+      const proxyUrl = `/api/proxy-download?url=${encodeURIComponent(
+        currentMediaData.bestVideoUrl
+      )}&ext=mp4&platform=${currentMediaData.platform}`;
+
+      try {
+        const response = await fetch(proxyUrl);
+        const blob = await response.blob();
+        const fileName = `ALLDOWN_${currentMediaData.platform}_${Date.now()}.mp4`;
+        const file = new File([blob], fileName, { type: 'video/mp4' });
+
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            files: [file],
+            title: 'ALLDOWN iOS Video'
+          });
+        } else {
+          // Fallback: kích hoạt tải file trực tiếp
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = fileName;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        }
+      } catch (e) {
+        if (e.name !== 'AbortError') {
+          window.location.href = proxyUrl;
+        }
+      } finally {
+        btn.textContent = oldText;
+        btn.disabled = false;
+      }
+    }
+
+    function saveToHistory(data, rawUrl) {
+      try {
+        const list = JSON.parse(localStorage.getItem('alldown_history') || '[]');
+        list.unshift({
+          id: data.id,
+          platform: data.platform,
+          title: data.title,
+          author: data.author?.name || '',
+          url: rawUrl,
+          time: new Date().toLocaleString('vi-VN')
+        });
+        localStorage.setItem('alldown_history', JSON.stringify(list.slice(0, 30)));
+      } catch {}
+    }
+
+    function renderHistory() {
+      const container = document.getElementById('historyList');
+      const list = JSON.parse(localStorage.getItem('alldown_history') || '[]');
+      if (list.length === 0) {
+        container.innerHTML =
+          '<p style="color:var(--text-muted); font-size:13px; text-align:center; padding:16px;">Chưa có video nào trong lịch sử.</p>';
+        return;
+      }
+      container.innerHTML = list
+        .map(
+          (item) => `
+        <div class="quality-item" onclick="reloadFromHistory('${item.url.replace(/'/g, "\\'")}')">
+          <div class="q-left">
+            <span class="q-badge">${item.platform.toUpperCase()}</span>
+            <div>
+              <div class="q-label" style="max-width:210px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${
+                item.title
+              }</div>
+              <div style="font-size:11px; color:var(--text-muted);">${item.time}</div>
+            </div>
+          </div>
+          <span class="q-dl-btn">Tải lại</span>
+        </div>
+      `
+        )
+        .join('');
+    }
+
+    function reloadFromHistory(url) {
+      switchTab('download', document.querySelector('.tab-item'));
+      urlInput.value = url;
+      clearBtn.style.display = 'flex';
+      handleExtract();
+    }
+
+    function clearHistory() {
+      localStorage.removeItem('alldown_history');
+      renderHistory();
+    }
+
+    async function loadServerInfo() {
+      try {
+        const res = await fetch('/api/info');
+        serverInfo = await res.json();
+        document.getElementById('lanInstallUrl').textContent = serverInfo.lanUrl;
+        document.getElementById('shortcutStreamUrl').textContent =
+          serverInfo.shortcutEndpoint;
+      } catch {
+        document.getElementById('lanInstallUrl').textContent = window.location.origin;
+        document.getElementById('shortcutStreamUrl').textContent =
+          window.location.origin + '/api/direct-stream?url=';
+      }
+    }
+
+    async function copyShortcutEndpoint() {
+      const text = document.getElementById('shortcutStreamUrl').textContent;
+      await navigator.clipboard.writeText(text);
+      alert('Đã sao chép Link API Phím tắt: ' + text);
+    }
+
+    async function copyLanUrl() {
+      const text = document.getElementById('lanInstallUrl').textContent;
+      await navigator.clipboard.writeText(text);
+      alert('Đã sao chép địa chỉ cài App iPhone: ' + text);
+    }
+
+    async function copyScriptableCode() {
+      const res = await fetch('/api/shortcut/alldown-scriptable.js');
+      const code = await res.text();
+      await navigator.clipboard.writeText(code);
+      alert('Đã sao chép toàn bộ code Scriptable iOS! Bạn chỉ cần mở app Scriptable trên iPhone và Dán (Paste).');
+    }
+
+    // Tự động nhận diện nếu mở qua Share Target hoặc ?url=...
+    window.addEventListener('DOMContentLoaded', () => {
+      loadServerInfo();
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      }
+      const params = new URLSearchParams(window.location.search);
+      const sharedUrl = params.get('url') || params.get('text');
+      if (sharedUrl) {
+        urlInput.value = sharedUrl;
+        clearBtn.style.display = 'flex';
+        handleExtract();
+      }
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,62 @@
+name: Build ALLDOWN iOS (.ipa)
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-ios-ipa:
+    name: Compile SwiftUI & Package .ipa (macOS)
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install XcodeGen & ldid
+        run: |
+          brew install xcodegen ldid
+
+      - name: Generate Xcode Project
+        working-directory: ios-native-swiftui
+        run: |
+          xcodegen generate
+
+      - name: Build Unsigned iOS Application (.app + ShareExtension)
+        working-directory: ios-native-swiftui
+        run: |
+          xcodebuild clean build \
+            -project ALLDOWN.xcodeproj \
+            -scheme ALLDOWN \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            AD_HOC_CODE_SIGNING_ALLOWED=YES
+
+      - name: Ad-Hoc / Fake Sign & Package into ALLDOWN-iOS-Pro.ipa
+        working-directory: ios-native-swiftui
+        run: |
+          mkdir -p Payload
+          cp -r build/Build/Products/Release-iphoneos/ALLDOWN.app Payload/
+
+          # Ad-hoc sign ShareExtension & Main App for Sideloadly / AltStore / TrollStore / ESign
+          if [ -d "Payload/ALLDOWN.app/PlugIns/ALLDOWNShareExtension.appex" ]; then
+            ldid -S Payload/ALLDOWN.app/PlugIns/ALLDOWNShareExtension.appex/ALLDOWNShareExtension || true
+          fi
+          ldid -S Payload/ALLDOWN.app/ALLDOWN || true
+
+          zip -r9 ALLDOWN-iOS-Pro-v2.0.ipa Payload
+
+      - name: Upload .ipa Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ALLDOWN-iOS-Pro-IPA
+          path: ios-native-swiftui/ALLDOWN-iOS-Pro-v2.0.ipa
+          if-no-files-found: error

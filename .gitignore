@@ -1,0 +1,6 @@
+node_modules/
+ios-native-swiftui/build/
+ios-native-swiftui/Payload/
+ios-native-swiftui/*.xcodeproj
+.DS_Store
+*.log
