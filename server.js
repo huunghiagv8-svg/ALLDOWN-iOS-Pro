@@ -28,7 +28,8 @@ const MIME_TYPES = {
   '.ico': 'image/x-icon',
   '.plist': 'application/x-plist',
   '.mobileconfig': 'application/x-apple-aspen-config',
-  '.ipa': 'application/octet-stream'
+  '.ipa': 'application/octet-stream',
+  '.apk': 'application/vnd.android.package-archive'
 };
 
 function getLocalLanIp() {
