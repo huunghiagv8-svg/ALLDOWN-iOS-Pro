@@ -53,7 +53,7 @@ struct ContentView: View {
                                         .foregroundColor(.white)
                                 }
                                 VStack(alignment: .leading, spacing: 3) {
-                                    Text("ALLDOWN iOS Pro")
+                                    Text("Nghĩa MMO ALLDOWNLOAD")
                                         .font(.headline.bold())
                                         .foregroundColor(.white)
                                     Text("TikTok Không Logo • Facebook Reels HD")
@@ -233,7 +233,7 @@ struct ContentView: View {
                         Section(header: Text("Cách Tải Từ Nút Chia Sẻ (Share Sheet) Giống SnapVideo")) {
                             Text("1. Mở ứng dụng TikTok hoặc Facebook trên iPhone.")
                             Text("2. Bấm nút Chia sẻ (Share) dưới video bạn muốn tải.")
-                            Text("3. Chọn 'Tải bằng ALLDOWN Pro' trong danh sách Chia sẻ.")
+                            Text("3. Chọn 'Tải bằng Nghĩa MMO ALLDOWNLOAD' trong danh sách Chia sẻ.")
                             Text("4. Video Không Logo HD sẽ tự động lưu thẳng vào Album Ảnh!")
                         }
 

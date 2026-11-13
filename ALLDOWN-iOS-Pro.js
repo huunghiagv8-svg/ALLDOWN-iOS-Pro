@@ -5,7 +5,7 @@
 
 /**
  * ============================================================================
- * ALLDOWN iOS Pro - Standalone iPhone Downloader (TikTok & Facebook HD)
+ * Nghĩa MMO ALLDOWNLOAD - Standalone iPhone Downloader (TikTok & Facebook HD)
  * Chạy trực tiếp trên iPhone qua Share Sheet (Không cần bật máy tính)
  * Tác giả: Nghĩa MMO (Rebuild & Upgrade từ SnapVideo)
  * ============================================================================
@@ -23,7 +23,7 @@ async function main() {
 
   if (!rawInput) {
     const alert = new Alert();
-    alert.title = "ALLDOWN iOS Pro";
+    alert.title = "Nghĩa MMO ALLDOWNLOAD";
     alert.message = "Không tìm thấy link! Hãy bấm Chia sẻ (Share) từ TikTok/Facebook hoặc Sao chép liên kết trước.";
     alert.addAction("Đóng");
     await alert.presentAlert();
@@ -36,7 +36,7 @@ async function main() {
 
   try {
     let videoUrl = null;
-    let title = "ALLDOWN Video";
+    let title = "Nghĩa MMO ALLDOWNLOAD Video";
 
     if (lower.includes("tiktok.com") || lower.includes("douyin.com")) {
       // Xử lý TikTok Không Logo HD qua TikWM API
@@ -53,7 +53,7 @@ async function main() {
         const d = res.data;
         title = d.title || "TikTok HD";
         const menu = new Alert();
-        menu.title = "ALLDOWN - TikTok Downloader";
+        menu.title = "Nghĩa MMO ALLDOWNLOAD - TikTok";
         menu.message = title.slice(0, 80);
         menu.addAction("🎬 Tải Video Full HD (Không Logo)");
         menu.addAction("⚡ Tải Video SD (Nhanh - Không Logo)");
@@ -89,11 +89,11 @@ async function main() {
       const sdUrl = sdMatch ? decodeFb(sdMatch[1]) : null;
 
       if (!hdUrl && !sdUrl) {
-        throw new Error("Video Facebook này ở chế độ Riêng tư hoặc cần tải qua Web App ALLDOWN.");
+        throw new Error("Video Facebook này ở chế độ Riêng tư hoặc cần tải qua Web App Nghĩa MMO ALLDOWNLOAD.");
       }
 
       const menu = new Alert();
-      menu.title = "ALLDOWN - Facebook Downloader";
+      menu.title = "Nghĩa MMO ALLDOWNLOAD - Facebook";
       menu.message = "Chọn chất lượng video Facebook muốn lưu:";
       if (hdUrl) menu.addAction("🎬 Tải Facebook Full HD");
       if (sdUrl) menu.addAction("⚡ Tải Facebook SD (Nhẹ)");
@@ -116,7 +116,7 @@ async function main() {
       FileManager.local().remove(tempPath);
 
       const n = new Notification();
-      n.title = "✅ ALLDOWN Đã Lưu Thành Công!";
+      n.title = "✅ Nghĩa MMO ALLDOWNLOAD Đã Lưu Thành Công!";
       n.body = "Video đã nằm trong ứng dụng Ảnh (Photos) trên iPhone của bạn.";
       await n.schedule();
     }

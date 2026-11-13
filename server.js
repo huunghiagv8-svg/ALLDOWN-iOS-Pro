@@ -97,7 +97,7 @@ const server = http.createServer(async (req, res) => {
     if (pathname === '/api/info') {
       const lanIp = getLocalLanIp();
       return sendJson(res, 200, {
-        app: 'ALLDOWN iOS Pro (SnapVideo Rebuild)',
+        app: 'Nghĩa MMO ALLDOWNLOAD (SnapVideo Rebuild)',
         version: '2.0.0',
         author: 'Nghia MMO',
         lanUrl: `http://${lanIp}:${PORT}`,
@@ -106,9 +106,11 @@ const server = http.createServer(async (req, res) => {
       });
     }
 
-    // 1b. Direct 1-Tap iCloud Shortcut Landing Page ("Nghĩa MMO Download" OpenGraph + Auto DeepLink)
+    // 1b. Direct 1-Tap iCloud Shortcut Landing Page ("Nghĩa MMO ALLDOWNLOAD" OpenGraph + Auto DeepLink)
     if (
       pathname === '/nghiammo' ||
+      pathname === '/alldownload' ||
+      pathname === '/nghia-mmo-alldownload' ||
       pathname === '/install-shortcut' ||
       pathname === '/snapvideo'
     ) {

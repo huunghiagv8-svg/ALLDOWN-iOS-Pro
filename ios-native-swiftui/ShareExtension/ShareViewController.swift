@@ -42,7 +42,7 @@ struct ShareSheetOverlayView: View {
     let extensionContext: NSExtensionContext?
     let onDismiss: () -> Void
 
-    @State private var statusTitle: String = "ALLDOWN iOS Pro"
+    @State private var statusTitle: String = "Nghĩa MMO ALLDOWNLOAD"
     @State private var statusSubtitle: String = "Đang đọc liên kết từ TikTok / Facebook..."
     @State private var isProcessing: Bool = true
     @State private var isSuccess: Bool = false
